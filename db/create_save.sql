@@ -1,0 +1,1 @@
+INSERT INTO saved (source, url, title) VALUES ($1, $2, $3)
