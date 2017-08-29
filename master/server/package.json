@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "concurrently": "^3.5.0",
+    "cors": "^2.8.4",
+    "express": "^4.15.4",
+    "express-session": "^1.15.5",
+    "massive": "^3.2.2",
+    "session": "^0.1.0"
+  },
+  "name": "givtop",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/chrisyi/givtop.git",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  },
+  "scripts": {
+      "server": "yarn index.js"
+  }
+}

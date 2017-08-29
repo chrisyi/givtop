@@ -1,0 +1,17 @@
+{
+  "name": "master",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "4.0.0-beta",
+    "concurrently": "^3.5.0",
+    "youtube-search": "^1.0.10"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "server": "index.js",
+    "client": "yarn run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  }
+}
