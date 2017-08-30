@@ -13,7 +13,7 @@ class RedditAPI extends Component {
   componentDidMount() {
     axios
     //   .get(`http://www.reddit.com/r/${this.props.subreddit}.json`)
-      .get(`http://www.reddit.com/search.json?q=title%3A${this.props.subreddit}&limit=5&t=day&restrict_sr=true&sort=top`)
+      .get(`http://www.reddit.com/search.json?q=title%3A${this.props.redditQuery}&limit=6&t=day&restrict_sr=true&sort=top`)
       .then(res => {
         const redditPosts = res.data.data.children.map(obj => obj.data);
         this.setState({ redditPosts });

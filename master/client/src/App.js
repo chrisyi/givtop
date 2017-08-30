@@ -3,6 +3,7 @@ import "./App.css";
 import SearchBar from "./components/search_bar";
 import YTSearch from "youtube-search";
 import RedditAPI from "./components/reddit_api";
+import ImgurAPI from "./components/imgur_api"
 
 // Youtube API
 const API_KEY = "AIzaSyBbcx_owAq66fzSPpBtWqBFWR55EsdUY2E";
@@ -19,7 +20,6 @@ const YTOptions = {
   type: "video"
 };
 YTSearch("music", YTOptions, (err, results) => {
-  console.log(YTOptions);
   if (err) return console.log(err);
   console.log(results);
 });
@@ -32,7 +32,7 @@ class App extends Component {
       <div className="App">
         <div className="App-header" />
         <SearchBar />
-        <RedditAPI subreddit={"trump"} />
+        <RedditAPI redditQuery={"cat"} />
       </div>
     );
   }
