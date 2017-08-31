@@ -11,9 +11,13 @@ const RedditList = props => {
 
   return (
     <div>
-      <ul className="col-md-4">{redditItems}</ul>
+      <div className="card-columns">
+        {redditItems}
+      </div>
     </div>
   );
 };
+
+//   <ul className="col-md-4">{redditItems}</ul>
 
 export default RedditList;
