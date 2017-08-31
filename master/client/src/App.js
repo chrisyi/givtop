@@ -3,25 +3,41 @@ import "./App.css";
 import SearchBar from "./components/search_bar";
 // import YTSearch from "youtube-search";
 // import ImgurAPI from "./components/imgur_api"
-import RedditAPI from "./components/reddit-api-search";
-import RedditList from "./components/reddit_list"
+import RedditList from "./components/reddit_list";
+import axios from "axios";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      redditPosts: [],
+      selectedRedditPost: null
+    };
+
+    this.redditUrlRoot = `http://www.reddit.com/search.json?q=title%3Abird&limit=12&t=day&restrict_sr=true&sort=top`;
+  }
+
+  componentDidMount() {
+    axios.get(this.redditUrlRoot).then(res => {
+      const redditPosts = res.data.data.children.map(obj => obj.data);
+      this.setState({ redditPosts });
+      console.log(this.state.redditPosts);
+    });
+  }
 
   render() {
     return (
       <div className="App">
         <div className="App-header" />
         <SearchBar />
-        <RedditList />
-        <RedditAPI redditQuery={"cat"} />
+        <RedditList redditPosts={this.state.redditPosts} />
       </div>
     );
   }
 }
 
 export default App;
-
 
 // Youtube API
 // const API_KEY = "AIzaSyBbcx_owAq66fzSPpBtWqBFWR55EsdUY2E";

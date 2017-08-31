@@ -1,11 +1,19 @@
-import React from 'react';
+import React from "react";
+// import RedditListItem from "./reddit_list_item";
+import "./reddit_list.css"
+import RedditColumnItem from "./reddit_column_item"
 
-const RedditList = () => {
-    return (
-        <ul className="col-md-4 list-group" >
+const RedditList = props => {
+  const redditItems = props.redditPosts.map(redditPost => {
+    // return <RedditListItem key={redditPost.id} redditPost={redditPost} />
+    return <RedditColumnItem key={redditPost.id} redditPost={redditPost} />
+  });
 
-        </ul>
-    )
-}
+  return (
+    <div>
+      <ul className="col-md-4">{redditItems}</ul>
+    </div>
+  );
+};
 
-export default RedditList
+export default RedditList;
