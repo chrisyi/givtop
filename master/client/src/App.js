@@ -15,7 +15,7 @@ class App extends Component {
       selectedRedditPost: null
     };
 
-    this.redditUrlRoot = `http://www.reddit.com/search.json?q=title%3Abird&limit=12&t=day&restrict_sr=true&sort=top`;
+    this.redditUrlRoot = `https://www.reddit.com/search.json?q=title%3Aplanet&limit=12&t=week&restrict_sr=true&sort=top`;
   }
 
   componentDidMount() {
