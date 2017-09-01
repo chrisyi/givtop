@@ -4,5 +4,16 @@
 
 .card-columns .card {
     display: inline-block;
-    width: 100%;
+}
+
+.card-body:hover {
+    background-color: #eee;     
+}
+
+.card-top:hover + .card-body {
+    background-color: #eee;     
+}
+
+.card-img-top {
+    padding: 5px;
 }

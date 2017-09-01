@@ -15,22 +15,40 @@ class App extends Component {
       selectedRedditPost: null
     };
 
-    this.redditUrlRoot = `https://www.reddit.com/search.json?q=title%3Aplanet&limit=12&t=week&restrict_sr=true&sort=top`;
+    this.redditTerm = "developer";
+
+    //this.redditUrlRoot = 
+
+    // this.redditSearch("developer")
   }
 
-  componentDidMount() {
-    axios.get(this.redditUrlRoot).then(res => {
-      const redditPosts = res.data.data.children.map(obj => obj.data);
-      this.setState({ redditPosts });
-      console.log(this.state.redditPosts);
-    });
-  }
+  componentDidMount () {
+    this.redditSearch()
+}
+
+redditSearch () {
+    axios.get(`https://www.reddit.com/search.json?q=title%3A${this
+    .redditTerm}&limit=12&t=week&restrict_sr=true&sort=top`)
+    .then(res => {
+        const redditPosts = res.data.data.children.map(obj => obj.data);
+        this.setState({
+          redditPosts: redditPosts,
+          selectedRedditPost: redditPosts[0]
+        })
+        console.log(this.state.redditPosts);
+        })
+    .catch(err => {
+        console.log(err)
+  });
+}
 
   render() {
     return (
       <div className="App">
         <div className="App-header" />
-        <SearchBar />
+        <SearchBar
+          onRedditSearchTermChange={term => (this.redditTerm = term)}
+        />
         <RedditList redditPosts={this.state.redditPosts} />
       </div>
     );
