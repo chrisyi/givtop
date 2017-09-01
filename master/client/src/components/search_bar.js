@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./search_bar.css";
 
 class SearchBar extends Component {
   constructor(props) {
@@ -7,12 +8,17 @@ class SearchBar extends Component {
     this.state = { term: "" };
   }
 
+  onInputChange(term) {
+    this.setState({ term: term });
+    this.props.onRedditSearchTermChange(term);
+  }
+
   render() {
     return (
-      <div>
+      <div className="search-bar">
         <input
-        value={this.state.term}
-          onChange={event => this.setState({ term: event.target.value })}
+          value={this.state.term}
+          onChange={event => this.onInputChange(event.target.value)}
         />
       </div>
     );
