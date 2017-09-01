@@ -1,8 +1,7 @@
+import _ from 'lodash';
 import React, { Component } from "react";
 import "./App.css";
 import SearchBar from "./components/search_bar";
-// import YTSearch from "youtube-search";
-// import ImgurAPI from "./components/imgur_api"
 import RedditList from "./components/reddit_list";
 import axios from "axios";
 
@@ -14,41 +13,38 @@ class App extends Component {
       redditPosts: [],
       selectedRedditPost: null
     };
-
-    this.redditTerm = "developer";
-
-    //this.redditUrlRoot = 
-
-    // this.redditSearch("developer")
+    this.redditSearch("react.js");
   }
 
-  componentDidMount () {
-    this.redditSearch()
-}
+  componentDidMount() {
+    this.redditSearch();
+  }
 
-redditSearch () {
-    axios.get(`https://www.reddit.com/search.json?q=title%3A${this
-    .redditTerm}&limit=12&t=week&restrict_sr=true&sort=top`)
-    .then(res => {
+  redditSearch(term) {
+    axios
+      .get(
+        `https://www.reddit.com/search.json?q=title%3A${term}&limit=12&t=week&restrict_sr=true&sort=top`
+      )
+      .then(res => {
         const redditPosts = res.data.data.children.map(obj => obj.data);
         this.setState({
           redditPosts: redditPosts,
           selectedRedditPost: redditPosts[0]
-        })
+        });
         console.log(this.state.redditPosts);
-        })
-    .catch(err => {
-        console.log(err)
-  });
-}
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 
   render() {
+    const redditSearch = _.debounce(term => { this.redditSearch(term) }, 300)
+
     return (
       <div className="App">
         <div className="App-header" />
-        <SearchBar
-          onRedditSearchTermChange={term => (this.redditTerm = term)}
-        />
+        <SearchBar onRedditSearchTermChange={redditSearch} />
         <RedditList redditPosts={this.state.redditPosts} />
       </div>
     );
@@ -56,6 +52,9 @@ redditSearch () {
 }
 
 export default App;
+
+// import YTSearch from "youtube-search";
+// import ImgurAPI from "./components/imgur_api"
 
 // Youtube API
 // const API_KEY = "AIzaSyBbcx_owAq66fzSPpBtWqBFWR55EsdUY2E";
